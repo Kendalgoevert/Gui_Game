@@ -107,27 +107,27 @@ class Add(tk.Frame):
         self.lbl_title = tk.Label(text = "Add Game",  font = TITLE_FONT)
         self.lbl_title.grid(row = 0, columnspan = 4, sticky ="news")
         #Genre entrybox
-        self.lbl_search_by = tk.Label(text = "Genre", font = BUTTON_FONT)
+        self.lbl_search_by = tk.Label(text = "Genre: ", font = BUTTON_FONT)
         self.lbl_search_by.grid(row = 1, column = 0, sticky ="news")        
         self.entry = tk.Entry (root)
         self.entry.grid(row = 2, column = 0)
         #Title entrybox
-        self.lbl_search_by = tk.Label(text = "Title", font = BUTTON_FONT)
+        self.lbl_search_by = tk.Label(text = "Title: ", font = BUTTON_FONT)
         self.lbl_search_by.grid(row = 1, column = 1, sticky ="news")        
         self.entry = tk.Entry (root)
         self.entry.grid(row = 2, column = 1)
         #Decoloper entrybox
-        self.lbl_search_by = tk.Label(text = "Devoloper", font = BUTTON_FONT)
+        self.lbl_search_by = tk.Label(text = "Devoloper: ", font = BUTTON_FONT)
         self.lbl_search_by.grid(row = 3, column = 0, sticky ="news")        
         self.entry = tk.Entry (root)
         self.entry.grid(row = 4, column = 0)  
         #Publisher entrybox
-        self.lbl_search_by = tk.Label(text = "Publisher", font = BUTTON_FONT)
+        self.lbl_search_by = tk.Label(text = "Publisher: ", font = BUTTON_FONT)
         self.lbl_search_by.grid(row = 3, column = 1, sticky ="news")        
         self.entry = tk.Entry (root)
         self.entry.grid(row = 4, column = 1)  
         #Year entrybox
-        self.lbl_search_by = tk.Label(text = "Year", font = BUTTON_FONT)
+        self.lbl_search_by = tk.Label(text = "Year: ", font = BUTTON_FONT)
         self.lbl_search_by.grid(row = 5, column = 0, sticky ="news")        
         self.entry = tk.Entry (root)
         self.entry.grid(row = 6, column = 0)
