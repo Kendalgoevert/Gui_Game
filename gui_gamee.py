@@ -12,21 +12,30 @@ BUTTON_FONT = ("Arial", 15)
 
 ##MAIN
 
-''''class MainMenu(tk.Frame):
+class MainMenu(tk.Frame):
     def __init__(self):
         tk.Frame.__init__(self)
-        self.lbl_title = tk.Label(text = "Game Library",  font = TITLE_FONT)
+        self.lbl_title = tk.Label(self, text = "Game Library",  font = TITLE_FONT)
         self.lbl_title.grid(row = 0, column = 0, sticky ="news")
-        self.btn_add = tk.Button(text = "Add", font = BUTTON_FONT)
-        self.btn_add.grid(row = 1, column = 0)
-        self.btn_add = tk.Button(text = "Edit", font = BUTTON_FONT)
-        self.btn_add.grid(row = 2, column = 0)
-        self.btn_add = tk.Button(text = "Search", font = BUTTON_FONT)
-        self.btn_add.grid(row = 3, column = 0)        
-        self.btn_add = tk.Button(text = "Remove", font = BUTTON_FONT)
-        self.btn_add.grid(row = 4, column = 0)
-        self.btn_add = tk.Button(text = "Save", font = BUTTON_FONT)
-        self.btn_add.grid(row = 5, column = 0)    '''         
+        
+        self.btn_add = tk.Button(self, text = "Add", font = BUTTON_FONT)
+        self.btn_add.grid(row = 1, column = 0, sticky = "news")
+        self.btn_add = tk.Button(self,text = "Edit", font = BUTTON_FONT)
+        self.btn_add.grid(row = 2, column = 0, sticky = "news")
+        self.btn_add = tk.Button(self,text = "Search", font = BUTTON_FONT)
+        self.btn_add.grid(row = 3, column = 0, sticky = "news")        
+        self.btn_add = tk.Button(self,text = "Remove", font = BUTTON_FONT)
+        self.btn_add.grid(row = 4, column = 0, sticky = "news")
+        self.btn_add = tk.Button(self,text = "Save", font = BUTTON_FONT)
+        self.btn_add.grid(row = 5, column = 0, sticky = "news")
+        
+        self.grid_columnconfigure(0, weight = 1)
+        self.grid_columnconfigure(1, weight = 1)
+        self.grid_columnconfigure(2, weight = 1)
+        self.grid_columnconfigure(3, weight = 1)
+        self.grid_columnconfigure(4, weight = 1)
+        
+
 
 '''class Search(tk.Frame): 
     def __init__(self):
@@ -101,7 +110,7 @@ BUTTON_FONT = ("Arial", 15)
         self.btn_add = tk.Button(text = "Remove", font = BUTTON_FONT)
         self.btn_add.grid(row = 2, column = 2)   '''
 
-class Add(tk.Frame):
+'''class Add(tk.Frame):
     def __init__(self):
         tk.Frame.__init__(self)
         self.lbl_title = tk.Label(text = "Add Game",  font = TITLE_FONT)
@@ -142,7 +151,7 @@ class Add(tk.Frame):
         self.btn_add = tk.Button(text = "Reset", font = BUTTON_FONT)
         self.btn_add.grid(row = 9, column = 2)
         self.btn_add = tk.Button(text = "Confirm", font = BUTTON_FONT)
-        self.btn_add.grid(row = 9, column = 3)         
+        self.btn_add.grid(row = 9, column = 3)  '''       
         
         
     
@@ -164,8 +173,9 @@ if __name__ == "__main__":
     root = tk.Tk()
     root.title("Game Lib")
     root.geometry("500x500")
-    add = Add()
-    add.grid(row = 0, column = 0)
+    mainmenu = MainMenu()
+    mainmenu.grid(row = 0, column = 0)
+    root.grid_columnconfigure(0, weight = 1)
     
 
          
