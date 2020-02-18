@@ -12,9 +12,15 @@ BUTTON_FONT = ("Arial", 15)
 
 ##MAIN
 
-class MainMenu(tk.Frame):
+class Screen(tk.Frame):
+    current = 0
     def __init__(self):
         tk.Frame.__init__(self)
+
+
+class MainMenu(Screen):
+    def __init__(self):
+        Screen.__init__(self)
         self.lbl_title = tk.Label(self, text = "Game Library",  font = TITLE_FONT)
         self.lbl_title.grid(row = 0, column = 0, sticky ="news")
         
@@ -35,11 +41,13 @@ class MainMenu(tk.Frame):
         self.grid_columnconfigure(3, weight = 1)
         self.grid_columnconfigure(4, weight = 1)
         
+  
+        
 
 
-class Search(tk.Frame): 
+class Search(Screen): 
     def __init__(self):
-        tk.Frame.__init__(self)
+        Screen.__init__(self)
         self.lbl_title = tk.Label(self,text = "Search",  font = TITLE_FONT)
         self.lbl_title.grid(row = 0, column = 0, sticky ="news")
         #Search bb label
@@ -115,17 +123,17 @@ class Search(tk.Frame):
 
 
 
-class Saved(tk.Frame):
+class Saved(Screen):
     def __init__(self):
-        tk.Frame.__init__(self)
+        Screen.__init__(self)
         self.lbl_title = tk.Label(self,text = "File Saved!",  font = TITLE_FONT)
         self.lbl_title.grid(row = 0, column = 0, sticky ="news")  
         self.btn_add = tk.Button(self,text = "OK", font = BUTTON_FONT)
         self.btn_add.grid(row = 1, column = 0)
 
-class Edit(tk.Frame):
+class Edit(Screen):
     def __init__(self):
-        tk.Frame.__init__(self)
+        Screen.__init__(self)
         self.lbl_title = tk.Label(self,text = "Which title would you like to edit?",  font = TITLE_FONT)
         self.lbl_title.grid(row = 0, columnspan = 5, sticky ="news")  
         options = ["one", "two"]
@@ -145,9 +153,9 @@ class Edit(tk.Frame):
         self.grid_columnconfigure(2, weight = 1)
      
 
-class Remove(tk.Frame):
+class Remove(Screen):
     def __init__(self):
-        tk.Frame.__init__(self)
+        Screen.__init__(self)
         self.lbl_title = tk.Label(self,text = "Which title would you like to remove?",  font = TITLE_FONT)
         self.lbl_title.grid(row = 0, columnspan = 5, sticky ="news")  
         #self.ent = tk.Entry (self)
@@ -163,9 +171,9 @@ class Remove(tk.Frame):
         self.btn_add.grid(row = 2, column = 2)
         
         
-class Verify_remove(tk.Frame):
+class VerifyRemove(Screen):
     def __init__(self):
-        tk.Frame.__init__(self)
+        Screen.__init__(self)
         self.lbl_title = tk.Label(self,text = "These games are marked for removal",  font = BUTTON_FONT)
         self.lbl_title.grid(row = 0, columnspan = 5, sticky ="news")
         self.results = ScrolledText(self,height = 8, width = 40)
@@ -175,9 +183,9 @@ class Verify_remove(tk.Frame):
         self.btn_add = tk.Button(self,text = "Remove", font = BUTTON_FONT)
         self.btn_add.grid(row = 2, column = 2)
 
-class Add(tk.Frame):
+class Add(Screen):
     def __init__(self):
-        tk.Frame.__init__(self)
+        Screen.__init__(self)
         self.lbl_title = tk.Label(self,text = "Add Game",  font = TITLE_FONT)
         self.lbl_title.grid(row = 0, columnspan = 4, sticky ="news")
         #Genre entrybox
@@ -238,9 +246,6 @@ class Add(tk.Frame):
         
         
         
-        
-       
-
 if __name__ == "__main__":
     data_file = open("game_library", "rb")
     games = pickle.load(data_file)
@@ -248,11 +253,56 @@ if __name__ == "__main__":
     root = tk.Tk()
     root.title("Game Lib")
     root.geometry("500x500")
-    add = Add()
-    add.grid(row = 0, column = 0)
-    root.grid_columnconfigure(0, weight = 1)
+    root.grid_columnconfigure(0, weight = 1)  
     
+    mainmenu = MainMenu()
+    mainmenu.grid(row = 0, column = 0, sticky = "news")
+    
+    add = Add()
+    add.grid(row = 0, column = 0, sticky = "news")
+    
+    edit = Edit()
+    edit.grid(row = 0, column = 0, sticky = "news")
+    
+    remove = Remove()
+    remove.grid(row = 0, column = 0, sticky = "news")
+    
+    saved = Saved()
+    saved.grid(row = 0, column = 0, sticky = "news")  
+    
+    search = Search()
+    search.grid(row = 0, column = 0, sticky = "news")
+    
+    verify_remove = VerifyRemove()
+    verify_remove.grid(row = 0, column = 0, sticky = "news")
+    
+ 
+    add= Add()
+    add.grid(row = 0, column = 0, sticky = "news")
+    
+ 
+    edit = Edit()
+    edit.grid(row = 0, column = 0, sticky = "news")
+    
+ 
+    search = Search()
+    search.grid(row = 0, column = 0, sticky = "news")
+    
+ 
+    remove = Remove()
+    remove.grid(row = 0, column = 0, sticky = "news")
+    
+ 
+    saved = Saved()
+    saved.grid(row = 0, column = 0, sticky = "news")    
+     
+    
+    
+       
 
+
+    
+  
          
     
           
