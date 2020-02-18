@@ -12,10 +12,16 @@ BUTTON_FONT = ("Arial", 15)
 
 ##MAIN
 
+
+
+
+
 class Screen(tk.Frame):
     current = 0
     def __init__(self):
         tk.Frame.__init__(self)
+
+
 
 
 class MainMenu(Screen):
@@ -255,49 +261,16 @@ if __name__ == "__main__":
     root.geometry("500x500")
     root.grid_columnconfigure(0, weight = 1)  
     
-    mainmenu = MainMenu()
-    mainmenu.grid(row = 0, column = 0, sticky = "news")
+   
     
-    add = Add()
-    add.grid(row = 0, column = 0, sticky = "news")
-    
-    edit = Edit()
-    edit.grid(row = 0, column = 0, sticky = "news")
-    
-    remove = Remove()
-    remove.grid(row = 0, column = 0, sticky = "news")
-    
-    saved = Saved()
-    saved.grid(row = 0, column = 0, sticky = "news")  
-    
-    search = Search()
-    search.grid(row = 0, column = 0, sticky = "news")
-    
-    verify_remove = VerifyRemove()
-    verify_remove.grid(row = 0, column = 0, sticky = "news")
-    
- 
-    add= Add()
-    add.grid(row = 0, column = 0, sticky = "news")
-    
- 
-    edit = Edit()
-    edit.grid(row = 0, column = 0, sticky = "news")
-    
- 
-    search = Search()
-    search.grid(row = 0, column = 0, sticky = "news")
-    
- 
-    remove = Remove()
-    remove.grid(row = 0, column = 0, sticky = "news")
-    
- 
-    saved = Saved()
-    saved.grid(row = 0, column = 0, sticky = "news")    
-     
-    
-    
+    screens = [MainMenu(), Search(), Saved(), Edit(), Remove(), VerifyRemove(), Add()]
+    screens[0].grid(row = 0, column = 0, sticky = "news")
+    screens[1].grid(row = 0, column = 0, sticky = "news")
+    screens[2].grid(row = 0, column = 0, sticky = "news")
+    screens[3].grid(row = 0, column = 0, sticky = "news")
+    screens[4].grid(row = 0, column = 0, sticky = "news")
+    screens[5].grid(row = 0, column = 0, sticky = "news")
+    screens[6].grid(row = 0, column = 0, sticky = "news")
        
 
 
