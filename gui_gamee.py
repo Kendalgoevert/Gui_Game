@@ -20,6 +20,9 @@ class Screen(tk.Frame):
     current = 0
     def __init__(self):
         tk.Frame.__init__(self)
+    def switch_frame():
+        screens[Screen.current].tkraise()
+        
 
 
 
@@ -28,18 +31,21 @@ class MainMenu(Screen):
     def __init__(self):
         Screen.__init__(self)
         self.lbl_title = tk.Label(self, text = "Game Library",  font = TITLE_FONT)
-        self.lbl_title.grid(row = 0, column = 0, sticky ="news")
-        
-        self.btn_add = tk.Button(self, text = "Add", font = BUTTON_FONT)
+        self.lbl_title.grid(row = 0, column = 0, sticky ="news")        
+        self.btn_add = tk.Button(self, text = "Add", font = BUTTON_FONT, command = self.go_add)
         self.btn_add.grid(row = 1, column = 0, sticky = "news")
-        self.btn_add = tk.Button(self,text = "Edit", font = BUTTON_FONT)
+        self.btn_add = tk.Button(self,text = "Edit", font = BUTTON_FONT, command = self.go_edit)
         self.btn_add.grid(row = 2, column = 0, sticky = "news")
-        self.btn_add = tk.Button(self,text = "Search", font = BUTTON_FONT)
+        self.btn_add = tk.Button(self,text = "Search", font = BUTTON_FONT, command = self.go_search)
         self.btn_add.grid(row = 3, column = 0, sticky = "news")        
-        self.btn_add = tk.Button(self,text = "Remove", font = BUTTON_FONT)
+        self.btn_add = tk.Button(self,text = "Remove", font = BUTTON_FONT, command = self.go_remove)
         self.btn_add.grid(row = 4, column = 0, sticky = "news")
-        self.btn_add = tk.Button(self,text = "Save", font = BUTTON_FONT)
+        self.btn_add = tk.Button(self,text = "Save", font = BUTTON_FONT, command = self.go_save)
         self.btn_add.grid(row = 5, column = 0, sticky = "news")
+        
+        
+ 
+        
         
         self.grid_columnconfigure(0, weight = 1)
         self.grid_columnconfigure(1, weight = 1)
@@ -47,7 +53,26 @@ class MainMenu(Screen):
         self.grid_columnconfigure(3, weight = 1)
         self.grid_columnconfigure(4, weight = 1)
         
-  
+    def go_add(self):
+        Screen.current = 6
+        Screen.switch_frame()
+        
+    def go_edit(self):
+        Screen.current = 3
+        Screen.switch_frame() 
+        
+    def go_search(self):
+        Screen.current = 1
+        Screen.switch_frame() 
+        
+    def go_remove(self):
+        Screen.current = 4
+        Screen.switch_frame()
+        
+    def go_save(self):
+        Screen.current = 2
+        Screen.switch_frame()     
+        
         
 
 
@@ -78,12 +103,18 @@ class Search(Screen):
         self.results = ScrolledText(self, height = 8, width = 40)
         self.results.grid(row = 5, columnspan = 3, sticky = "news")
         #Back Clear and submit buttons
-        self.btn_add = tk.Button(self,text = "Back", font = BUTTON_FONT)
+        self.btn_add = tk.Button(self,text = "Back", font = BUTTON_FONT, command = self.go_back)
         self.btn_add.grid(row = 6, column = 0, sticky = "news")
         self.btn_add = tk.Button(self, text = "Clear", font = BUTTON_FONT)
         self.btn_add.grid(row = 6, column = 1, sticky = "news")         
         self.btn_add = tk.Button(self, text = "Submit", font = BUTTON_FONT)
         self.btn_add.grid(row = 6, column = 2, sticky = "news")
+        
+    def go_back(self):
+        Screen.current = 0
+        Screen.switch_frame()    
+        
+        
 
 #class SubFrame(tk.Frame):
     #def __init__(self, parent):
@@ -134,8 +165,12 @@ class Saved(Screen):
         Screen.__init__(self)
         self.lbl_title = tk.Label(self,text = "File Saved!",  font = TITLE_FONT)
         self.lbl_title.grid(row = 0, column = 0, sticky ="news")  
-        self.btn_add = tk.Button(self,text = "OK", font = BUTTON_FONT)
+        self.btn_add = tk.Button(self,text = "OK", font = BUTTON_FONT, command = self.go_back)
         self.btn_add.grid(row = 1, column = 0)
+        
+    def go_back(self):
+        Screen.current = 0
+        Screen.switch_frame()     
 
 class Edit(Screen):
     def __init__(self):
@@ -149,7 +184,7 @@ class Edit(Screen):
         self.menu.grid(row = 1, column = 1, sticky = "news")         
         #self.ent = tk.Entry (self)
         #self.ent.grid(row = 1, columnspan =4 )
-        self.btn_add = tk.Button(self,text = "Cancel", font = BUTTON_FONT)
+        self.btn_add = tk.Button(self,text = "Cancel", font = BUTTON_FONT, command = self.go_back)
         self.btn_add.grid(row = 2, column = 1)
         self.btn_add = tk.Button(self,text = "OK", font = BUTTON_FONT)
         self.btn_add.grid(row = 2, column = 2) 
@@ -157,6 +192,10 @@ class Edit(Screen):
         self.grid_columnconfigure(0, weight = 1)
         self.grid_columnconfigure(1, weight = 1)
         self.grid_columnconfigure(2, weight = 1)
+        
+    def go_back(self):
+        Screen.current = 0
+        Screen.switch_frame()       
      
 
 class Remove(Screen):
@@ -171,11 +210,14 @@ class Remove(Screen):
         self.tkvar.set(options[0])
         self.menu = tk.OptionMenu(self,self.tkvar, *options )
         self.menu.grid(row = 1, column = 1, sticky = "news")                 
-        self.btn_add = tk.Button(self,text = "Cancel", font = BUTTON_FONT)
+        self.btn_add = tk.Button(self,text = "Cancel", font = BUTTON_FONT, command = self.go_back)
         self.btn_add.grid(row = 2, column = 1)
         self.btn_add = tk.Button(self,text = "Remove", font = BUTTON_FONT)
         self.btn_add.grid(row = 2, column = 2)
         
+    def go_back(self):
+        Screen.current = 0
+        Screen.switch_frame()           
         
 class VerifyRemove(Screen):
     def __init__(self):
@@ -184,10 +226,14 @@ class VerifyRemove(Screen):
         self.lbl_title.grid(row = 0, columnspan = 5, sticky ="news")
         self.results = ScrolledText(self,height = 8, width = 40)
         self.results.grid(row = 1, columnspan = 3)
-        self.btn_add = tk.Button(self,text = "Cancel", font = BUTTON_FONT)
+        self.btn_add = tk.Button(self,text = "Cancel", font = BUTTON_FONT, command = self.go_back)
         self.btn_add.grid(row = 2, column = 1)
         self.btn_add = tk.Button(self,text = "Remove", font = BUTTON_FONT)
         self.btn_add.grid(row = 2, column = 2)
+    
+    def go_back(self):
+        Screen.current = 0
+        Screen.switch_frame()    
 
 class Add(Screen):
     def __init__(self):
@@ -197,23 +243,23 @@ class Add(Screen):
         #Genre entrybox
         self.lbl_search_by = tk.Label(self,text = "Genre: ", font = BUTTON_FONT)
         self.lbl_search_by.grid(row = 1, column = 0, sticky ="news")        
-        self.entry = tk.Entry (self)
-        self.entry.grid(row = 1, column = 1)
+        self.ent = tk.Entry (self)
+        self.ent.grid(row = 1, column = 1)
         #Title entrybox
         self.lbl_search_by = tk.Label(self,text = "Title: ", font = BUTTON_FONT)
         self.lbl_search_by.grid(row = 2, column = 0, sticky ="news")        
-        self.entry = tk.Entry (self)
-        self.entry.grid(row = 2, column = 1)
+        self.ent = tk.Entry (self)
+        self.ent.grid(row = 2, column = 1)
         #Decoloper entrybox
         self.lbl_search_by = tk.Label(self,text = "Devoloper: ", font = BUTTON_FONT)
         self.lbl_search_by.grid(row = 3, column = 0, sticky ="news")        
-        self.entry = tk.Entry (self)
-        self.entry.grid(row = 3, column = 1)  
+        self.ent = tk.Entry (self)
+        self.ent.grid(row = 3, column = 1)  
         #Publisher entrybox
         self.lbl_search_by = tk.Label(self,text = "Publisher: ", font = BUTTON_FONT)
         self.lbl_search_by.grid(row = 4, column = 0, sticky ="news")        
-        self.entry = tk.Entry (self)
-        self.entry.grid(row = 4, column = 1)  
+        self.ent = tk.Entry (self)
+        self.ent.grid(row = 4, column = 1)  
         #Year entrybox
         self.lbl_search_by = tk.Label(self,text = "Year: ", font = BUTTON_FONT)
         self.lbl_search_by.grid(row = 5, column = 0, sticky ="news")        
@@ -225,7 +271,7 @@ class Add(Screen):
         self.results = ScrolledText(self,height = 8, width = 40)
         self.results.grid(row = 7, columnspan = 3)
         #Cancel Reset Remove Buttons
-        self.btn_add = tk.Button(self,text = "Cancel", font = BUTTON_FONT)
+        self.btn_add = tk.Button(self,text = "Cancel", font = BUTTON_FONT, command = self.go_back)
         self.btn_add.grid(row = 9, column = 0, sticky ="news")
         self.btn_add = tk.Button(self,text = "Reset", font = BUTTON_FONT)
         self.btn_add.grid(row = 9, column = 1, sticky ="news")
@@ -244,7 +290,9 @@ class Add(Screen):
         self.grid_columnconfigure(9, weight = 1)
         self.grid_columnconfigure(10, weight = 1)
     
-    
+    def go_back(self):
+        Screen.current = 0
+        Screen.switch_frame()     
       
          
          
@@ -271,6 +319,7 @@ if __name__ == "__main__":
     screens[4].grid(row = 0, column = 0, sticky = "news")
     screens[5].grid(row = 0, column = 0, sticky = "news")
     screens[6].grid(row = 0, column = 0, sticky = "news")
+    screens[0].tkraise()
        
 
 
