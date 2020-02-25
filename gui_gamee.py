@@ -336,10 +336,12 @@ class EditGame1(tk.Frame):
         self.lbl_remove.grid(row = 0, columnspan = 2,
                                 sticky = "news")
        
-        options = ["Halo3", "Halo2", "GTA 5"]
+        self.options = ["Select A Title"]
+        for key in games.keys():
+            self.options.append(games[key][1])
         self.tkvar = tk.StringVar(self)
-        self.tkvar.set(options[0])
-        self.menu = tk.OptionMenu(self, self.tkvar, *options)
+        self.tkvar.set(self.options[0])
+        self.menu = tk.OptionMenu(self, self.tkvar, *self.options)
         self.menu.grid(row = 1, columnspan = 2,
                        sticky = "news")
        
