@@ -125,12 +125,12 @@ class Add(Screen):
         self.lbl_search_by.grid(row = 5, column = 0, sticky ="news")        
         self.ent_year = tk.Entry (self)
         self.ent_year.grid(row = 5, column = 1)
-        
+        #Release year entrybox
         self.lbl_search_by = tk.Label(self, text = "Release Year: ", font = BUTTON_FONT)
         self.lbl_search_by.grid(row = 1, column = 2, sticky ="news")        
         self.ent_release_year = tk.Entry (self)
         self.ent_release_year.grid(row = 1, column = 3)
-       
+        #Rating Entrybox
         self.lbl_search_by = tk.Label(self, text = "Rating: ", font = BUTTON_FONT)
         self.lbl_search_by.grid(row = 2, column = 2, sticky ="news")        
         self.ent_rating = tk.Entry (self)
@@ -404,76 +404,78 @@ class SearchParamiters(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, master=parent)
        
-        self.genre_var = tk.BooleanVar()
+        self.genre_var = tk.BooleanVar(self)
         self.genre_var.set(True) 
         self.chk_genre = tk.Checkbutton(self, text = "Genre" , var = self.genre_var)
         self.chk_genre.grid(row = 0, column = 0, sticky = "nws")
         
-        self.title_var = tk.BooleanVar()
+        self.title_var = tk.BooleanVar(self)
         self.title_var.set(True) 
         self.chk_genre = tk.Checkbutton(self, text = "Title", var = self.title_var)
         self.chk_genre.grid(row = 1, column = 0, sticky = "nws")
                 
     
-        self.developer_var = tk.BooleanVar()
+        self.developer_var = tk.BooleanVar(self)
         self.developer_var.set(True)          
         self.chk_genre = tk.Checkbutton(self, text = "Developer", var = self.developer_var)
         self.chk_genre.grid(row = 2, column = 0, sticky = "nws")
         
-        self.publisher_var = tk.BooleanVar()
+        self.publisher_var = tk.BooleanVar(self)
         self.publisher_var.set(True) 
         self.chk_genre = tk.Checkbutton(self, text = "Publisher", var = self.publisher_var)
         self.chk_genre.grid(row = 3, column = 0, sticky = "nws")
                  
         
-        self.platform_var = tk.BooleanVar()
+        self.platform_var = tk.BooleanVar(self)
         self.platform_var.set(True) 
         self.chk_genre = tk.Checkbutton(self, text = "Platform", var = self.platform_var)
         self.chk_genre.grid(row = 4, column = 0, sticky = "nws")
                 
         
-        self.release_year_var = tk.BooleanVar()
+        self.release_year_var = tk.BooleanVar(self)
         self.release_year_var.set(True)        
         self.chk_genre = tk.Checkbutton(self, text = "Release Year", var = self.release_year_var)
         self.chk_genre.grid(row = 0, column = 1, sticky = "nws")
         
-        self.rating_var = tk.BooleanVar()
+        self.rating_var = tk.BooleanVar(self)
         self.rating_var.set(True) 
         self.chk_genre = tk.Checkbutton(self, text = "Rating", var = self.rating_var)
         self.chk_genre.grid(row = 1, column = 1, sticky = "nws")
                  
         
-        self.single_multi_var = tk.BooleanVar()
+        self.single_multi_var = tk.BooleanVar(self)
         self.single_multi_var.set(True)  
         self.chk_genre = tk.Checkbutton(self, text = "Single/Multi", var = self.single_multi_var)
         self.chk_genre.grid(row = 2, column = 1, sticky = "nws")
                 
         
-        self.price_var = tk.BooleanVar()
+        self.price_var = tk.BooleanVar(self)
         self.price_var.set(True) 
         self.chk_genre = tk.Checkbutton(self, text = "Price", var = self.price_var)
         self.chk_genre.grid(row = 3, column = 1, sticky = "nws")
                  
         
-        self.played_var = tk.BooleanVar()
+        self.played_var = tk.BooleanVar(self)
         self.played_var.set(True)  
         self.chk_genre = tk.Checkbutton(self, text = "Played?", var = self.played_var)
         self.chk_genre.grid(row = 4, column = 1, sticky = "nws")
                        
         
-        self.purchase_date_var = tk.BooleanVar()
+        self.purchase_date_var = tk.BooleanVar(self)
         self.purchase_date_var.set(True) 
         self.chk_genre = tk.Checkbutton(self, text = "Purchase Date", var = self.purchase_date_var)
         self.chk_genre.grid(row = 0, column = 2, sticky = "nws")
                        
         
-        self.notes_var = tk.BooleanVar()
+        self.notes_var = tk.BooleanVar(self)
         self.notes_var.set(True)  
         self.chk_genre = tk.Checkbutton(self, text = "Notes", var = self.notes_var)
         self.chk_genre.grid(row = 1, column = 2, sticky = "nws")
                 
-                
-    #def filter_print(self):
+    
+        
+        
+        
         
        
                
@@ -520,19 +522,97 @@ class SearchGame(Screen):
         self.btn_add.grid(row = 6, column = 0,
                           sticky = "news")
        
-        self.btn_add = tk.Button(self, text = "Clear", font = BUTTON_FONT)
+        self.btn_add = tk.Button(self, text = "Clear", font = BUTTON_FONT, command = self.clear)
         self.btn_add.grid(row = 6, column = 1,
                           sticky = "news")
+        
        
-        self.btn_add = tk.Button(self, text = "Submit", font = BUTTON_FONT)
+        self.btn_add = tk.Button(self, text = "Submit", font = BUTTON_FONT, command = self.submit_search)
         self.btn_add.grid(row = 6, column = 2,
                           sticky = "news")
-       
+        for key in games.keys():
+            entry = games[key]
+            self.filter_print(entry)       
     def go_main(self):
         Screen.current = 0
         Screen.switch_frame()    
        
-       
+    def filter_print(self, entry):
+        if self.frm_search_paramiters.genre_var.get() == True:
+            msg = entry[0] + "\n"
+            self.results.insert("insert", msg)
+            
+        if self.frm_search_paramiters.title_var.get() == True:
+            msg = entry[0] + "\n"
+            self.results.insert("insert", msg)
+            
+        if self.frm_search_paramiters.developer_var.get() == True:
+            msg = entry[0] + "\n"
+            self.results.insert("insert", msg) 
+            
+        if self.frm_search_paramiters.publisher_var.get() == True:
+            msg = entry[0] + "\n"
+            self.results.insert("insert", msg)        
+            
+        if self.frm_search_paramiters.platform_var.get() == True:
+            msg = entry[0] + "\n"
+            self.results.insert("insert", msg) 
+            
+        if self.frm_search_paramiters.release_year_var.get() == True:
+            msg = entry[0] + "\n"
+            self.results.insert("insert", msg)
+            
+        if self.frm_search_paramiters.rating_var.get() == True:
+            msg = entry[0] + "\n"
+            self.results.insert("insert", msg)
+            
+        if self.frm_search_paramiters.single_multi_var.get() == True:
+            msg = entry[0] + "\n"
+            self.results.insert("insert", msg) 
+            
+        if self.frm_search_paramiters.price_var.get() == True:
+            msg = entry[0] + "\n"
+            self.results.insert("insert", msg) 
+            
+        if self.frm_search_paramiters.played_var.get() == True:
+            msg = entry[0] + "\n"
+            self.results.insert("insert", msg) 
+            
+        if self.frm_search_paramiters.purchase_date_var.get() == True:
+            msg = entry[0] + "\n"
+            self.results.insert("insert", msg) 
+        
+        if self.frm_search_paramiters.notes_var.get() == True:
+            msg = entry[0] + "\n"
+            self.results.insert("insert", msg)     
+                           
+        msg = " **************************************\n"
+        self.results.insert("insert", msg)
+        
+        
+    def clear(self):
+        self.frm_search_paramiters.genre_var.set(False)
+        self.frm_search_paramiters.title_var.set(False)
+        self.frm_search_paramiters.developer_var.set(False)
+        self.frm_search_paramiters.publisher_var.set(False)
+        self.frm_search_paramiters.platform_var.set(False)
+        self.frm_search_paramiters.release_year_var.set(False)
+        self.frm_search_paramiters.rating_var.set(False)
+        self.frm_search_paramiters.single_multi_var.set(False)
+        self.frm_search_paramiters.price_var.set(False)
+        self.frm_search_paramiters.played_var.set(False)
+        self.frm_search_paramiters.purchase_date_var.set(False)
+        self.frm_search_paramiters.notes_var.set(False)
+        self.results.delete(0.0, "end")
+    
+    def submit_search(self):
+        self.results.delete(0.0, "end")
+        for key in games.keys():
+            entry = games[key]
+            self.filter_print(entry)
+        
+        
+        
 
 
 
