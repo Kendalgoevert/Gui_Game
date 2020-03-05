@@ -1,15 +1,7 @@
+'''GUI Version of Game Library Console App'''
 #!/usr/bin/python3
 #Kendal Goevert
 #2-10-2020
-
-
-'''GUI Version of Game Library Console App'''
-
-import pickle
-
-import tkinter as tk
-
-from tkinter.scrolledtext import ScrolledText
 
 
 
