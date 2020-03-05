@@ -260,7 +260,11 @@ class EditGame1(tk.Frame):
     def go_edit_two(self):
        
         if self.tkvar.get() == self.options[0]:
-            pass
+            popup = tk.Tk()
+            popup.Title("select a title")
+            msg = "Error select a title"
+            frm_error = PopMessage(popup, msg)
+            frm_error.grid(row = 0, column = 0)
         else:
             for i in range(len(self.options)):
                 if self.tkvar.get() == self.options[i]:
@@ -610,7 +614,20 @@ class SearchGame(Screen):
         for key in games.keys():
             entry = games[key]
             self.filter_print(entry)
-        
+    
+    def print_search(self):
+        self.scr_results.delete(0.0, "end")
+        keyword = self.ent_search_for.get()
+        for key in games.keys():
+            entry = games[key]
+            if self.search_by_var == self.options[0]:           
+                self.filter_print(entry)
+                
+            if search_by_var.get == self.options[1]:
+                if keyword in entry[0]:
+                    self.filter_print(entry)
+                
+            
         
         
 
@@ -739,6 +756,21 @@ if __name__ == "__main__":
     screens[4].grid(row = 0, column = 0, sticky = "news")
    
     screens[0].tkraise()
+    
+class PopMessage(tk.Frame):
+    def __init__(self, parent, msg = "Something"):    
+        tk.Frame__init__(self, master = parent)
+        self.parent = parent
+        
+        self.lbl_continue = tk.Label(self, text = msg)
+        self.lbl_continue(row = 0, column = 0, sticky = "news")
+        
+        self.btn_ok = tk_Button(self, text = "ok", command = Self.parent.destroy)
+        self.btn_ok.grid(row = 0, column = 0 )
+
+    
+    
+    
     '''main_menu = MainMenu()
     main_menu.grid(row = 0, column = 0,
                    sticky = "news")
