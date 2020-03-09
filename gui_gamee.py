@@ -651,8 +651,7 @@ class SearchGame(Screen):
         keyword = self.ent_search_for.get()
         for key in games.keys():
             entry = games[key]
-            if self.search_by_var == self.options[0]:
-                entry = games[key]
+            if self.search_by_var == self.options[0]:                
                 self.filter_print(entry)
                
             if self.search_by_var.get() == self.options[1]:

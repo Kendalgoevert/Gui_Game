@@ -86,9 +86,15 @@ class MainMenu(Screen):
         frm_edit_list.grid(row = 0, column = 0)
    
     def go_save(self):
+        #print("running save()")
+        data_file = open("game_lib.pickle", "wb")
+        pickle.dump(games, data_file)
+        data_file.close()
+        print("Game Saved")
+            
         pop_up = tk.Tk()
         pop_up.title("Save")
-        frm_edit_list = Save(pop_up)
+        frm_edit_list = PopMessage(pop_up, "saved")
         frm_edit_list.grid(row = 0, column = 0)    
 
 
@@ -109,11 +115,11 @@ class Add(Screen):
         self.lbl_search_by.grid(row = 2, column = 0, sticky ="news")        
         self.ent_title = tk.Entry (self)
         self.ent_title.grid(row = 2, column = 1)
-        #Devoloper entrybox
-        self.lbl_search_by = tk.Label(self, text = "Devoloper: ", font = BUTTON_FONT)
+        #developer entrybox
+        self.lbl_search_by = tk.Label(self, text = "developer: ", font = BUTTON_FONT)
         self.lbl_search_by.grid(row = 3, column = 0, sticky ="news")        
-        self.ent_devoloper = tk.Entry (self)
-        self.ent_devoloper.grid(row = 3, column = 1)  
+        self.ent_developer = tk.Entry (self)
+        self.ent_developer.grid(row = 3, column = 1)  
         #Publisher entrybox
         self.lbl_search_by = tk.Label(self, text = "Publisher: ", font = BUTTON_FONT)
         self.lbl_search_by.grid(row = 4, column = 0, sticky ="news")        
@@ -192,7 +198,7 @@ class Add(Screen):
          
         self.ent_genre.delete(0, "end")
         self.ent_title.delete(0, "end")
-        self.ent_devoloper.delete(0, "end")
+        self.ent_developer.delete(0, "end")
         self.ent_publisher.delete(0, "end")
        
         self.ent_year.delete(0, "end")
@@ -260,9 +266,9 @@ class EditGame1(tk.Frame):
        
         if self.tkvar.get() == self.options[0]:
             popup = tk.Tk()
-            popup.Title("~")
+            popup.title("Select A Title")
             msg="ERROR, select a title"
-            frm_error = PopMessage(popup, msg)
+            frm_error = PopMessage(popup, "Select A Title")
             frm_error.grid(row=0, column=0)
            
         else:
@@ -284,32 +290,6 @@ class EditTwo(Screen):
     def __init__(self):
         Screen.__init__(self)
         self.edit_key = [0]
-   
-        def update(self):
-            entry = games[self.edit_key]
-            self.ent_genre.delete(0, "end")
-            self.ent_genre.insert(0, entry[0])
-            self.ent_title.delete(0, "end")
-            self.ent_title.insert(0, entry[0])
-            self.ent_devoloper.delete(0, "end")
-            self.ent_devoloper.insert(0, entry[0])
-            self.ent_publisher.delete(0, "end")
-            self.ent_publisher.insert(0, entry[0])
-            self.ent_platform.delete(0, "end")
-            self.ent_platform.insert(0, entry[0])
-            self.ent_purchase_date.delete(0, "end")
-            self.ent_purchase_date.insert(0, entry[0])
-            self.ent_release_year.delete(0, "end")
-            self.ent_release_year.insert(0, entry[0])
-            self.ent_rating.delete(0, "end")
-            self.ent_rating.insert(0, entry[0])    
-            self.ent_single_multi.delete(0, "end")
-            self.ent_single_multi.insert(0, entry[0])
-            self.ent_price.delete(0, "end")
-            self.ent_price.insert(0, entry[0])
-            self.ent_played.delete(0, "end")
-            self.ent_played.insert(0, entry[0])              
-       
        
         self.lbl_title = tk.Label(self, text = "Edit Game",  font = TITLE_FONT)
         self.lbl_title.grid(row = 0, columnspan = 4, sticky ="news")
@@ -321,53 +301,53 @@ class EditTwo(Screen):
         #Title entrybox
         self.lbl_search_by = tk.Label(self, text = "Title: ", font = BUTTON_FONT)
         self.lbl_search_by.grid(row = 2, column = 0, sticky ="news")        
-        self.entry = tk.Entry (self)
-        self.entry.grid(row = 2, column = 1)
+        self.ent_title = tk.Entry (self)
+        self.ent_title.grid(row = 2, column = 1)
         #Decoloper entrybox
-        self.lbl_search_by = tk.Label(self, text = "Devoloper: ", font = BUTTON_FONT)
+        self.lbl_search_by = tk.Label(self, text = "developer: ", font = BUTTON_FONT)
         self.lbl_search_by.grid(row = 3, column = 0, sticky ="news")        
-        self.entry = tk.Entry (self)
-        self.entry.grid(row = 3, column = 1)  
+        self.ent_developer = tk.Entry (self)
+        self.ent_developer.grid(row = 3, column = 1)  
         #Publisher entrybox
         self.lbl_search_by = tk.Label(self, text = "Publisher: ", font = BUTTON_FONT)
         self.lbl_search_by.grid(row = 4, column = 0, sticky ="news")        
-        self.entry = tk.Entry (self)
-        self.entry.grid(row = 4, column = 1)  
+        self.ent_publisher = tk.Entry (self)
+        self.ent_publisher.grid(row = 4, column = 1)  
         #Year entrybox
         self.lbl_search_by = tk.Label(self, text = "Platform: ", font = BUTTON_FONT)
         self.lbl_search_by.grid(row = 5, column = 0, sticky ="news")        
-        self.entry = tk.Entry (self)
-        self.entry.grid(row = 5, column = 1)
+        self.ent_platform = tk.Entry (self)
+        self.ent_platform.grid(row = 5, column = 1)
        
         self.lbl_search_by = tk.Label(self, text = "Release Year: ", font = BUTTON_FONT)
         self.lbl_search_by.grid(row = 1, column = 2, sticky ="news")        
-        self.entry = tk.Entry (self)
-        self.entry.grid(row = 1, column = 3)
+        self.ent_release_year = tk.Entry (self)
+        self.ent_release_year.grid(row = 1, column = 3)
        
         self.lbl_search_by = tk.Label(self, text = "Rating: ", font = BUTTON_FONT)
         self.lbl_search_by.grid(row = 2, column = 2, sticky ="news")        
-        self.entry = tk.Entry (self)
-        self.entry.grid(row = 2, column = 3)
+        self.ent_rating = tk.Entry (self)
+        self.ent_rating.grid(row = 2, column = 3)
        
         self.lbl_search_by = tk.Label(self, text = "Single/Multiplayer: ", font = BUTTON_FONT)
         self.lbl_search_by.grid(row = 3, column = 2, sticky ="news")        
-        self.entry = tk.Entry (self)
-        self.entry.grid(row = 3, column = 3)
+        self.ent_single_multi = tk.Entry (self)
+        self.ent_single_multi.grid(row = 3, column = 3)
        
         self.lbl_search_by = tk.Label(self, text = "Price: ", font = BUTTON_FONT)
         self.lbl_search_by.grid(row = 4, column = 2, sticky ="news")        
-        self.entry = tk.Entry (self)
-        self.entry.grid(row = 4, column = 3)
+        self.ent_price = tk.Entry (self)
+        self.ent_price.grid(row = 4, column = 3)
        
         self.lbl_search_by = tk.Label(self, text = "Played it?: ", font = BUTTON_FONT)
         self.lbl_search_by.grid(row = 5, column = 2, sticky ="news")        
-        self.entry = tk.Entry (self)
-        self.entry.grid(row = 5, column = 3)
+        self.ent_played = tk.Entry (self)
+        self.ent_played.grid(row = 5, column = 3)
        
         self.lbl_search_by = tk.Label(self, text = "Purchase Date: ", font = BUTTON_FONT)
         self.lbl_search_by.grid(row = 6, column = 0, sticky ="news")        
-        self.entry = tk.Entry (self)
-        self.entry.grid(row = 6, column = 1)        
+        self.ent_purchase_date = tk.Entry (self)
+        self.ent_purchase_date.grid(row = 6, column = 1)        
        
         #Notes Scrolled text box
         self.lbl_search_by = tk.Label(self, text = "Notes: ", font = BUTTON_FONT)
@@ -379,9 +359,11 @@ class EditTwo(Screen):
         self.btn_add = tk.Button(self, text = "Cancel", font = BUTTON_FONT,
                                  command = self.go_edit)
         self.btn_add.grid(row = 9, column = 0, sticky ="news")
-        self.btn_add = tk.Button(self, text = "Reset", font = BUTTON_FONT)
+        self.btn_add = tk.Button(self, text = "Reset", font = BUTTON_FONT,
+                                 command = self.reset)
         self.btn_add.grid(row = 9, column = 1, sticky ="news")
-        self.btn_add = tk.Button(self, text = "Confirm", font = BUTTON_FONT)
+        self.btn_add = tk.Button(self, text = "Confirm", font = BUTTON_FONT,
+                                 command = self.confirm)
         self.btn_add.grid(row = 9, column = 2, sticky ="news")        
        
         self.grid_columnconfigure(0, weight = 1)
@@ -395,13 +377,47 @@ class EditTwo(Screen):
         self.grid_columnconfigure(8, weight = 1)
         self.grid_columnconfigure(9, weight = 1)
         self.grid_columnconfigure(10, weight = 1)
+        
+    def update(self):
+        entry = games[self.edit_key]
+        self.ent_genre.delete(0, "end")
+        self.ent_genre.insert(0, entry[0])
+        self.ent_title.delete(0, "end")
+        self.ent_title.insert(0, entry[1])
+        self.ent_developer.delete(0, "end")
+        self.ent_developer.insert(0, entry[2])
+        self.ent_publisher.delete(0, "end")
+        self.ent_publisher.insert(0, entry[3])
+        self.ent_platform.delete(0, "end")
+        self.ent_platform.insert(0, entry[4])
+        self.ent_purchase_date.delete(0, "end")
+        self.ent_purchase_date.insert(0, entry[5])
+        self.ent_release_year.delete(0, "end")
+        self.ent_release_year.insert(0, entry[6])
+        self.ent_rating.delete(0, "end")
+        self.ent_rating.insert(0, entry[7])    
+        self.ent_single_multi.delete(0, "end")
+        self.ent_single_multi.insert(0, entry[8])
+        self.ent_price.delete(0, "end")
+        self.ent_price.insert(0, entry[9])
+        self.ent_played.delete(0, "end")
+        self.ent_played.insert(0, entry[10])       
 
     def go_edit(self):
         pop_up = tk.Tk()
         pop_up.title("Edit")
         frm_edit_list = EditGame1(pop_up)
-        frm_edit_list.grid(row = 0, column = 0)    
+        frm_edit_list.grid(row = 0, column = 0)
+        
+    def reset(self):
+        self.update()
 
+        
+    def confirm(self):
+        Screen.current = 0
+        Screen.switch_frame()
+        
+        
 
 '''Sub-frame containing all the checkboxes with the different search parameters'''
 class SearchParameters(tk.Frame):
@@ -415,66 +431,66 @@ class SearchParameters(tk.Frame):
        
         self.title_var = tk.BooleanVar(self)
         self.title_var.set(True)
-        self.chk_genre = tk.Checkbutton(self, text = "Title", var = self.title_var)
-        self.chk_genre.grid(row = 1, column = 0, sticky = "nws")
+        self.chk_title = tk.Checkbutton(self, text = "Title", var = self.title_var)
+        self.chk_title.grid(row = 1, column = 0, sticky = "nws")
                
    
         self.developer_var = tk.BooleanVar(self)
         self.developer_var.set(True)          
-        self.chk_genre = tk.Checkbutton(self, text = "Developer", var = self.developer_var)
-        self.chk_genre.grid(row = 2, column = 0, sticky = "nws")
+        self.chk_developer = tk.Checkbutton(self, text = "Developer", var = self.developer_var)
+        self.chk_developer.grid(row = 2, column = 0, sticky = "nws")
        
         self.publisher_var = tk.BooleanVar(self)
         self.publisher_var.set(True)
-        self.chk_genre = tk.Checkbutton(self, text = "Publisher", var = self.publisher_var)
-        self.chk_genre.grid(row = 3, column = 0, sticky = "nws")
+        self.chk_publisher = tk.Checkbutton(self, text = "Publisher", var = self.publisher_var)
+        self.chk_publisher.grid(row = 3, column = 0, sticky = "nws")
                  
        
         self.platform_var = tk.BooleanVar(self)
         self.platform_var.set(True)
-        self.chk_genre = tk.Checkbutton(self, text = "Platform", var = self.platform_var)
-        self.chk_genre.grid(row = 4, column = 0, sticky = "nws")
+        self.chk_platform = tk.Checkbutton(self, text = "Platform", var = self.platform_var)
+        self.chk_platform.grid(row = 4, column = 0, sticky = "nws")
                
        
         self.release_year_var = tk.BooleanVar(self)
         self.release_year_var.set(True)        
-        self.chk_genre = tk.Checkbutton(self, text = "Release Year", var = self.release_year_var)
-        self.chk_genre.grid(row = 0, column = 1, sticky = "nws")
+        self.chk_release_year = tk.Checkbutton(self, text = "Release Year", var = self.release_year_var)
+        self.chk_release_year.grid(row = 0, column = 1, sticky = "nws")
        
         self.rating_var = tk.BooleanVar(self)
         self.rating_var.set(True)
-        self.chk_genre = tk.Checkbutton(self, text = "Rating", var = self.rating_var)
-        self.chk_genre.grid(row = 1, column = 1, sticky = "nws")
+        self.chk_rating = tk.Checkbutton(self, text = "Rating", var = self.rating_var)
+        self.chk_rating.grid(row = 1, column = 1, sticky = "nws")
                  
        
         self.single_multi_var = tk.BooleanVar(self)
         self.single_multi_var.set(True)  
-        self.chk_genre = tk.Checkbutton(self, text = "Single/Multi", var = self.single_multi_var)
-        self.chk_genre.grid(row = 2, column = 1, sticky = "nws")
+        self.chk_single_multi = tk.Checkbutton(self, text = "Single/Multi", var = self.single_multi_var)
+        self.chk_single_multi.grid(row = 2, column = 1, sticky = "nws")
                
        
         self.price_var = tk.BooleanVar(self)
         self.price_var.set(True)
-        self.chk_genre = tk.Checkbutton(self, text = "Price", var = self.price_var)
-        self.chk_genre.grid(row = 3, column = 1, sticky = "nws")
+        self.chk_price = tk.Checkbutton(self, text = "Price", var = self.price_var)
+        self.chk_price.grid(row = 3, column = 1, sticky = "nws")
                  
        
         self.played_var = tk.BooleanVar(self)
         self.played_var.set(True)  
-        self.chk_genre = tk.Checkbutton(self, text = "Played?", var = self.played_var)
-        self.chk_genre.grid(row = 4, column = 1, sticky = "nws")
+        self.chk_played = tk.Checkbutton(self, text = "Played?", var = self.played_var)
+        self.chk_played.grid(row = 4, column = 1, sticky = "nws")
                        
        
         self.purchase_date_var = tk.BooleanVar(self)
         self.purchase_date_var.set(True)
-        self.chk_genre = tk.Checkbutton(self, text = "Purchase Date", var = self.purchase_date_var)
-        self.chk_genre.grid(row = 0, column = 2, sticky = "nws")
+        self.chk_purchase_date = tk.Checkbutton(self, text = "Purchase Date", var = self.purchase_date_var)
+        self.chk_purchase_date.grid(row = 0, column = 2, sticky = "nws")
                        
        
         self.notes_var = tk.BooleanVar(self)
         self.notes_var.set(True)  
-        self.chk_genre = tk.Checkbutton(self, text = "Notes", var = self.notes_var)
-        self.chk_genre.grid(row = 1, column = 2, sticky = "nws")
+        self.chk_notes = tk.Checkbutton(self, text = "Notes", var = self.notes_var)
+        self.chk_notes.grid(row = 1, column = 2, sticky = "nws")
                
    
        
@@ -582,7 +598,7 @@ class SearchGame(Screen):
         for key in games.keys():
             entry = games[key]
             self.filter_print(entry)'''
-        self.filter_print()
+        self.filter_print(entry)
            
              
     def filter_print(self, entry):
@@ -738,10 +754,10 @@ class PopMessage(tk.Frame):
             self.parent = parent
            
             self.lbl_continue = tk.Label(self, text = msg)
-            self.lbl_continue.grid(row=0, column=0, columnspan=0)
+            self.lbl_continue.grid(row=0, column=0, columnspan=3)
            
             self.btn_ok = tk.Button(self, text = "OK", command = self.parent.destroy)
-            self.btn_ok.grid(row=0, column=0, columnspan=0)
+            self.btn_ok.grid(row=1, column=1, columnspan=1)
            
 
 '''class OptFrame(tk.Frame):
@@ -782,6 +798,14 @@ if __name__ == "__main__":
     screens[4].grid(row = 0, column = 0, sticky = "news")
    
     screens[0].tkraise()
+    
+   
+
+    
+    
+    
+    
+    
     '''main_menu = MainMenu()
     main_menu.grid(row = 0, column = 0,
                    sticky = "news")
